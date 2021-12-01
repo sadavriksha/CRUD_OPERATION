@@ -1,0 +1,45 @@
+{% extends "employee_register/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{form.Username|as_crispy_field}}
+    {{form.Email|as_crispy_field}}
+    {{form.Password|as_crispy_field}}
+    <div class="row">
+        <div class="col-md-4">
+            {{form.emp_code|as_crispy_field}}
+        </div>
+        <div class="col-md-8">
+            {{form.Confirm|as_crispy_field}}
+        </div>
+    </div>
+    {{form.Address|as_crispy_field}}
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+        <div class="col-md-4">
+            {%if user.is_authenticated%}
+            <i> hello , {{user.Username}}</i>
+            <a href="{% url 'employee_logout' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> log out
+            </a>
+            {% else%}
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a>
+            <a href="{% url 'employee_logout' %}" class="btn btn-secondary btn-danger btn-lg">
+                <i class="fas fa-stream"></i>  Log Out
+            </a>
+            {% endif %}
+
+
+        </div>
+    </div>
+
+</form>
+{% endblock content %}

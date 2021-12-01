@@ -1,0 +1,38 @@
+{% extends "employee_register/base.html" %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+{% block content %}
+    <section class="contact" id="contact">
+        <h2 class="text-center">Login In</h2>
+        <form method="post" action="/contact">
+            {%csrf_token %}
+        <div class="indo">
+            <input type="text" name="Username" id="Username"  placeholder="Username">
+            <input type="text" name="Password" id="Password" placeholder="Password">
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                    Submit</button>
+            </div>
+            <div class="col-md-4">
+                {%if user.is_authenticated%}
+                <i> hello , {{user.Username}}</i>
+                <a href="{% url 'employee_logout' %}" class="btn btn-secondary btn-block btn-lg">
+                    <i class="fas fa-stream"></i> log out
+                </a>
+                {% else%}
+                <a href="{% url 'employee_list' %}" class="btn btn-secondary btn-block btn-lg">
+                    <i class="fas fa-stream"></i> Back to list
+                </a>
+
+    
+                <a href="{% url 'employee_insert' %}" class="btn btn-secondary btn-block btn-lg">
+                    <i class="fas fa-stream"></i> Back to Register
+                </a>
+                {% endif %}
+         </div>
+        </form>
+    </section>
+{% endblock content %}
